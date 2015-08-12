@@ -1,0 +1,38 @@
+function result = GradientDescent(X,Y,test)
+%This function will be a linear classification with
+%the gradient descent algorithm .
+%       X The training samples with any size m*n
+%       Y The training sample output has m colums
+%       test the test sample  has n colums
+%       z is the return value,
+
+error = 0.01;          %初始化迭代精度
+learning_rate = 0.1;  %学习步长
+e = 1;    %迭代误差
+[n,m] = size(X);       %X为训练样本
+for i = 1:m            %初始化权向量
+    a(i) = 0;
+end
+while e > error
+    for i = 1:m             %求取梯度值,并更新权向量
+        A(i) = a(i);
+        for j = 1:n
+            g(j) = 0;
+            for k = 1:m
+                g(j) = g(j) + X(j,k)*a(k);
+            end
+            a(i) = a(i) - learning_rate*(g(j) - Y(j))*X(j,i);
+        end  
+    end
+    e = norm(a-A);
+end
+t = im2double(test);
+[n,m] = size(t);
+for j = 1:n
+    res(j) = 0;
+    for i = 1:m
+        res(j) = res(j) + a(i)*t(i);    %获得判别函数
+    end
+end
+return;
+
